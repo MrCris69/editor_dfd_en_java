@@ -1,14 +1,12 @@
-package vista;
+package core.vista;
 import javax.swing.*;
-public class PrincipalGestor {
+public class Principal {
 
     public static void main(String[] args) {
-        // TODO code application logic here
         SwingUtilities.invokeLater(()-> {
-            VentanasAplicacion ventGest = new VentanasAplicacion ();
+            MenuHerramientas ventGest = new MenuHerramientas ();
             ventGest.setVisible(true);
         });
         
     }
-    
 }

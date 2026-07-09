@@ -1,4 +1,4 @@
-package modelo;
+package core.modelo;
 
 public class DiagramaFlujo {
     

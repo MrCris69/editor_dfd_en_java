@@ -3,3 +3,5 @@ Un pequeño proyecto universitario de estudiantes de segundo año de Ingenieria 
 jejeje siuuuuu :D
 Fecha y hora: 09/07/2026 12:45 PM
 Organizamos la estructura en paquetes y clases base, también se creo una ventana en blanco funcional.
+Fecha y hora: 09/07/2026 15:10 PM
+Modificamos Los archivos, la estructura y distribución de las tareas.
