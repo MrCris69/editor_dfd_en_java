@@ -6,6 +6,13 @@ import modulos.datos.PanelesDatosUI;
 import modulos.datos.BloqueAsignar;
 import modulos.datos.BloqueLeer;
 import modulos.datos.BloqueFuncion;
+import modulos.ciclos.PanelesCiclosUI;
+import modulos.ciclos.BloqueMientras;
+import modulos.ciclos.BloquePara;
+import modulos.ciclos.BloqueRepetir;
+import core.controlador.GestorFicheros;
+import core.controlador.GestorProyecto;
+import java.io.File;
 
 public class VentanaPrincipal extends JFrame {
     
@@ -85,7 +92,72 @@ public class VentanaPrincipal extends JFrame {
         panel.add(btnLeer);
         panel.add(Box.createRigidArea(new Dimension(0, 15)));
         panel.add(btnFuncion);
+        
+        
+        
+        JLabel tituloCiclos = new JLabel("Módulo Ciclos");
+        tituloCiclos.setFont(new Font("Arial", Font.BOLD, 14));
+        tituloCiclos.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(tituloCiclos);
+        panel.add(Box.createRigidArea(new Dimension(0, 10)));
 
+        JButton btnMientras = new JButton("Mientras (While)");
+        JButton btnPara = new JButton("Para (For)");
+        JButton btnRepetir = new JButton("Repetir (Do-While)");
+
+        estilizarBoton(btnMientras, new Color(46, 139, 87)); 
+        estilizarBoton(btnPara, new Color(46, 139, 87));
+        estilizarBoton(btnRepetir, new Color(46, 139, 87));
+
+        btnMientras.addActionListener(e -> {
+            BloqueMientras b = PanelesCiclosUI.crearBloqueMientras(posicionX, posicionY);
+            if (b != null) { lienzo.agregarBloque(b); actualizarCoordenadas(); }
+        });
+        btnPara.addActionListener(e -> {
+            BloquePara b = PanelesCiclosUI.crearBloquePara(posicionX, posicionY);
+            if (b != null) { lienzo.agregarBloque(b); actualizarCoordenadas(); }
+        });
+        btnRepetir.addActionListener(e -> {
+            BloqueRepetir b = PanelesCiclosUI.crearBloqueRepetir(posicionX, posicionY);
+            if (b != null) { lienzo.agregarBloque(b); actualizarCoordenadas(); }
+        });
+
+        panel.add(btnMientras); panel.add(Box.createRigidArea(new Dimension(0, 5)));
+        panel.add(btnPara);     panel.add(Box.createRigidArea(new Dimension(0, 5)));
+        panel.add(btnRepetir);  panel.add(Box.createRigidArea(new Dimension(0, 30)));
+
+        //BOTONES (Guardar / Generar)
+        JButton btnGuardar = new JButton("Guardar Proyecto");
+        JButton btnCargar = new JButton("Cargar Proyecto");
+        JButton btnGenerar = new JButton("Generar Código");
+        
+        estilizarBoton(btnGuardar, Color.DARK_GRAY);
+        estilizarBoton(btnCargar, Color.DARK_GRAY);
+        estilizarBoton(btnGenerar, Color.BLACK);
+
+        btnGuardar.addActionListener(e -> {
+            JFileChooser fc = new JFileChooser();
+            if (fc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+                GestorFicheros.guardar(fc.getSelectedFile(), lienzo.getBloques());
+                JOptionPane.showMessageDialog(this, "Guardado con éxito");
+            }
+        });
+
+        btnCargar.addActionListener(e -> {
+            JFileChooser fc = new JFileChooser();
+            if (fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+                lienzo.setBloques(GestorFicheros.cargar(fc.getSelectedFile()));
+            }
+        });
+
+        btnGenerar.addActionListener(e -> {
+            String codigo = GestorProyecto.generarCodigoFinal(lienzo.getBloques());
+            JOptionPane.showMessageDialog(this, new JTextArea(codigo), "Pseudocódigo Generado", JOptionPane.INFORMATION_MESSAGE);
+        });
+
+        panel.add(btnGuardar); panel.add(Box.createRigidArea(new Dimension(0, 5)));
+        panel.add(btnCargar);  panel.add(Box.createRigidArea(new Dimension(0, 5)));
+        panel.add(btnGenerar);
         return panel;
     }
 

@@ -35,4 +35,12 @@ public class LienzoTrabajo extends JPanel {
             bloque.dibujar(g);
         }
     }
+    // Añade este método dentro de la clase LienzoTrabajo
+    public java.util.List<core.modelo.BloqueBase> getBloques() {
+        return this.bloques;
+    }
+    public void setBloques(java.util.List<core.modelo.BloqueBase> nuevosBloques) {
+        this.bloques = nuevosBloques;
+        repaint();
+    }
 }
