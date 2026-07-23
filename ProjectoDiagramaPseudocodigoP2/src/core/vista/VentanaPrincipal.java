@@ -1,5 +1,5 @@
 package core.vista;
-
+//PRIMERA VERSION
 import javax.swing.*;
 import java.awt.*;
 import modulos.datos.PanelesDatosUI;
@@ -12,7 +12,10 @@ import modulos.ciclos.BloquePara;
 import modulos.ciclos.BloqueRepetir;
 import core.controlador.GestorFicheros;
 import core.controlador.GestorProyecto;
-import java.io.File;
+import modulos.control.BloqueCondicional;
+import modulos.control.BloqueEscribir;
+import modulos.control.BloqueSegun;
+import modulos.control.PanelesControlUI;
 
 public class VentanaPrincipal extends JFrame {
     
@@ -41,60 +44,74 @@ public class VentanaPrincipal extends JFrame {
     private JPanel crearPanelHerramientas() {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setBackground(new Color(240, 240, 240)); // Gris claro
+        panel.setBackground(new Color(240, 240, 240));
         panel.setBorder(BorderFactory.createEmptyBorder(20, 15, 20, 15));
 
-        JLabel titulo = new JLabel("Módulo Datos");
-        titulo.setFont(new Font("Arial", Font.BOLD, 16));
-        titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(titulo);
-        panel.add(Box.createRigidArea(new Dimension(0, 20))); // Espacio en blanco
+        // --- MÓDULO DATOS (Integrante 1) ---
+        JLabel tituloDatos = new JLabel("Módulo Datos");
+        tituloDatos.setFont(new Font("Arial", Font.BOLD, 14));
+        tituloDatos.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(tituloDatos);
+        panel.add(Box.createRigidArea(new Dimension(0, 10)));
 
-        // Instanciar los botones interactivos[cite: 1]
         JButton btnAsignar = new JButton("Asignar / Proceso");
         JButton btnLeer = new JButton("Leer Dato");
         JButton btnFuncion = new JButton("Llamar Función");
 
-        // Aplicar diseño a los botones
         estilizarBoton(btnAsignar, new Color(70, 130, 180));
         estilizarBoton(btnLeer, new Color(70, 130, 180));
         estilizarBoton(btnFuncion, new Color(70, 130, 180));
 
-        // --- EVENTOS DE LOS BOTONES ---
-        // Aquí conectamos la interfaz con tu código del Módulo de Datos
         btnAsignar.addActionListener(e -> {
             BloqueAsignar b = PanelesDatosUI.crearBloqueAsignar(posicionX, posicionY);
-            if (b != null) {
-                lienzo.agregarBloque(b);
-                actualizarCoordenadas();
-            }
+            if (b != null) { lienzo.agregarBloque(b); actualizarCoordenadas(); }
         });
-
         btnLeer.addActionListener(e -> {
             BloqueLeer b = PanelesDatosUI.crearBloqueLeer(posicionX, posicionY);
-            if (b != null) {
-                lienzo.agregarBloque(b);
-                actualizarCoordenadas();
-            }
+            if (b != null) { lienzo.agregarBloque(b); actualizarCoordenadas(); }
         });
-
         btnFuncion.addActionListener(e -> {
             BloqueFuncion b = PanelesDatosUI.crearBloqueFuncion(posicionX, posicionY);
-            if (b != null) {
-                lienzo.agregarBloque(b);
-                actualizarCoordenadas();
-            }
+            if (b != null) { lienzo.agregarBloque(b); actualizarCoordenadas(); }
         });
 
-        // Agregar los botones al panel lateral
-        panel.add(btnAsignar);
-        panel.add(Box.createRigidArea(new Dimension(0, 15)));
-        panel.add(btnLeer);
-        panel.add(Box.createRigidArea(new Dimension(0, 15)));
-        panel.add(btnFuncion);
-        
-        
-        
+        panel.add(btnAsignar); panel.add(Box.createRigidArea(new Dimension(0, 5)));
+        panel.add(btnLeer);    panel.add(Box.createRigidArea(new Dimension(0, 5)));
+        panel.add(btnFuncion); panel.add(Box.createRigidArea(new Dimension(0, 20)));
+
+        // --- MÓDULO CONTROL (Integrante 2) ---
+        JLabel tituloControl = new JLabel("Módulo Control");
+        tituloControl.setFont(new Font("Arial", Font.BOLD, 14));
+        tituloControl.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(tituloControl);
+        panel.add(Box.createRigidArea(new Dimension(0, 10)));
+
+        JButton btnEscribir = new JButton("Escribir / Salida");
+        JButton btnCondicional = new JButton("Condicional (Si)");
+        JButton btnSegun = new JButton("Según (Switch)");
+
+        estilizarBoton(btnEscribir, new Color(139, 0, 139)); // Botones morados
+        estilizarBoton(btnCondicional, new Color(139, 0, 139));
+        estilizarBoton(btnSegun, new Color(139, 0, 139));
+
+        btnEscribir.addActionListener(e -> {
+            BloqueEscribir b = PanelesControlUI.crearBloqueEscribir(posicionX, posicionY);
+            if (b != null) { lienzo.agregarBloque(b); actualizarCoordenadas(); }
+        });
+        btnCondicional.addActionListener(e -> {
+            BloqueCondicional b = PanelesControlUI.crearBloqueCondicional(posicionX, posicionY);
+            if (b != null) { lienzo.agregarBloque(b); actualizarCoordenadas(); }
+        });
+        btnSegun.addActionListener(e -> {
+            BloqueSegun b = PanelesControlUI.crearBloqueSegun(posicionX, posicionY);
+            if (b != null) { lienzo.agregarBloque(b); actualizarCoordenadas(); }
+        });
+
+        panel.add(btnEscribir);    panel.add(Box.createRigidArea(new Dimension(0, 5)));
+        panel.add(btnCondicional); panel.add(Box.createRigidArea(new Dimension(0, 5)));
+        panel.add(btnSegun);       panel.add(Box.createRigidArea(new Dimension(0, 20)));
+
+        // --- MÓDULO CICLOS (Integrante 3) ---
         JLabel tituloCiclos = new JLabel("Módulo Ciclos");
         tituloCiclos.setFont(new Font("Arial", Font.BOLD, 14));
         tituloCiclos.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -105,7 +122,7 @@ public class VentanaPrincipal extends JFrame {
         JButton btnPara = new JButton("Para (For)");
         JButton btnRepetir = new JButton("Repetir (Do-While)");
 
-        estilizarBoton(btnMientras, new Color(46, 139, 87)); 
+        estilizarBoton(btnMientras, new Color(46, 139, 87));
         estilizarBoton(btnPara, new Color(46, 139, 87));
         estilizarBoton(btnRepetir, new Color(46, 139, 87));
 
@@ -126,7 +143,7 @@ public class VentanaPrincipal extends JFrame {
         panel.add(btnPara);     panel.add(Box.createRigidArea(new Dimension(0, 5)));
         panel.add(btnRepetir);  panel.add(Box.createRigidArea(new Dimension(0, 30)));
 
-        //BOTONES (Guardar / Generar)
+        // --- BOTONES GLOBALES (Guardar / Generar) ---
         JButton btnGuardar = new JButton("Guardar Proyecto");
         JButton btnCargar = new JButton("Cargar Proyecto");
         JButton btnGenerar = new JButton("Generar Código");
@@ -137,27 +154,28 @@ public class VentanaPrincipal extends JFrame {
 
         btnGuardar.addActionListener(e -> {
             JFileChooser fc = new JFileChooser();
-            if (fc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+            if (fc.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
                 GestorFicheros.guardar(fc.getSelectedFile(), lienzo.getBloques());
-                JOptionPane.showMessageDialog(this, "Guardado con éxito");
+                JOptionPane.showMessageDialog(null, "Guardado con éxito");
             }
         });
 
         btnCargar.addActionListener(e -> {
             JFileChooser fc = new JFileChooser();
-            if (fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
                 lienzo.setBloques(GestorFicheros.cargar(fc.getSelectedFile()));
             }
         });
 
         btnGenerar.addActionListener(e -> {
             String codigo = GestorProyecto.generarCodigoFinal(lienzo.getBloques());
-            JOptionPane.showMessageDialog(this, new JTextArea(codigo), "Pseudocódigo Generado", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, new JTextArea(codigo), "Pseudocódigo Generado", JOptionPane.INFORMATION_MESSAGE);
         });
 
         panel.add(btnGuardar); panel.add(Box.createRigidArea(new Dimension(0, 5)));
         panel.add(btnCargar);  panel.add(Box.createRigidArea(new Dimension(0, 5)));
         panel.add(btnGenerar);
+
         return panel;
     }
 
