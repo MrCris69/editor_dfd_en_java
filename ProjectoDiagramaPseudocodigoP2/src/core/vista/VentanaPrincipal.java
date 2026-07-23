@@ -56,9 +56,9 @@ public class VentanaPrincipal extends JFrame {
         JButton btnFuncion = new JButton("Llamar Función");
 
         // Aplicar diseño a los botones
-        estilizarBoton(btnAsignar);
-        estilizarBoton(btnLeer);
-        estilizarBoton(btnFuncion);
+        estilizarBoton(btnAsignar, new Color(70, 130, 180));
+        estilizarBoton(btnLeer, new Color(70, 130, 180));
+        estilizarBoton(btnFuncion, new Color(70, 130, 180));
 
         // --- EVENTOS DE LOS BOTONES ---
         // Aquí conectamos la interfaz con tu código del Módulo de Datos
@@ -162,11 +162,11 @@ public class VentanaPrincipal extends JFrame {
     }
 
     // Método para darle un look moderno a los botones de Swing
-    private void estilizarBoton(JButton boton) {
+    private void estilizarBoton(JButton boton, Color colorFondo) {
         boton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        boton.setMaximumSize(new Dimension(160, 40));
+        boton.setMaximumSize(new Dimension(160, 35));
         boton.setFocusPainted(false);
-        boton.setBackground(new Color(70, 130, 180)); // Azul acero
+        boton.setBackground(colorFondo); 
         boton.setForeground(Color.WHITE);
         boton.setFont(new Font("Arial", Font.BOLD, 12));
     }

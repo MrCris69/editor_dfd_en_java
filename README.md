@@ -59,3 +59,7 @@ El proyecto utiliza un flujo de trabajo basado en Feature Branches. Todas las ra
 
 ## Ejecucion
 Para ejecutar la aplicacion, compilar el proyecto y correr la clase `Principal.java` ubicada en el paquete `core.vista`.
+
+# Merge
+Fecha y hora: 17/07/2026 14:15 PM
+Se hizo merge de las ramas al main
