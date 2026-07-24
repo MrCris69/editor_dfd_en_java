@@ -28,10 +28,16 @@ public class LienzoTrabajo extends JPanel {
     // El método mágico de Java Swing que dibuja los elementos[cite: 1]
     @Override
     protected void paintComponent(Graphics g) {
-        super.paintComponent(g); // Limpia el panel antes de redibujar
-
-        // Recorre todos los bloques (sean Secuenciales, Condicionales, etc.) y los dibuja
-        for (BloqueBase bloque : bloques) {
+        super.paintComponent(g);
+        
+        // 1. Dibujar las líneas de conexión PRIMERO (para que queden detrás de las figuras)
+        for (int i = 1; i < bloques.size(); i++) {
+            core.modelo.Conexion flecha = new core.modelo.Conexion(bloques.get(i - 1), bloques.get(i), null);
+            flecha.dibujar(g);
+        }
+        
+        // 2. Dibujar los bloques de código encima
+        for (core.modelo.BloqueBase bloque : bloques) {
             bloque.dibujar(g);
         }
     }
