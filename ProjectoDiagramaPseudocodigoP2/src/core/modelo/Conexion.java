@@ -15,29 +15,21 @@ public class Conexion {
     }
 
     public void dibujar(Graphics g) {
-        if (origen != null && destino != null) {
-            // Calcular el centro inferior del bloque de origen
-            int x1 = origen.getX() + origen.ancho / 2;
-            int y1 = origen.getY() + origen.alto;
-            
-            // Calcular el centro superior del bloque de destino
-            int x2 = destino.getX() + destino.ancho / 2;
-            int y2 = destino.getY();
+        g.setColor(java.awt.Color.BLACK);
 
-            g.setColor(Color.BLACK);
-            g.drawLine(x1, y1, x2, y2); // Dibuja la línea principal
-            
-            // Dibuja la punta de la flecha
-            int tamañoFlecha = 7;
-            g.drawLine(x2, y2, x2 - tamañoFlecha, y2 - tamañoFlecha);
-            g.drawLine(x2, y2, x2 + tamañoFlecha, y2 - tamañoFlecha);
+        // Coordenadas del bloque de ORIGEN (Punto central inferior)
+        int x1 = origen.getX() + (origen.getAncho() / 2);
+        int y1 = origen.getY() + origen.getAlto(); 
 
-            // Si la conexión sale de un rombo, escribe "Sí" o "No" en la flecha
-            if (tipoCamino != null && !tipoCamino.isEmpty()) {
-                g.setColor(Color.RED);
-                g.drawString(tipoCamino, (x1 + x2) / 2 + 10, (y1 + y2) / 2);
-            }
-        }
+        // Coordenadas del bloque de DESTINO (Punto central superior)
+        int x2 = destino.getX() + (destino.getAncho() / 2);
+        int y2 = destino.getY(); 
+
+        // Dibuja la línea centrada
+        g.drawLine(x1, y1, x2, y2);
+
+        // Dibuja la punta de la flecha (opcional)
+        g.fillPolygon(new int[]{x2, x2 - 5, x2 + 5}, new int[]{y2, y2 - 5, y2 - 5}, 3);
     }
     
     public BloqueBase getOrigen() { return origen; }
