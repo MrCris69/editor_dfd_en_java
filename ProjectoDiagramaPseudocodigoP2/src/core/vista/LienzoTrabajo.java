@@ -92,4 +92,5 @@ public class LienzoTrabajo extends JPanel {
         this.bloques = nuevosBloques;
         repaint();
     }
+    
 }
