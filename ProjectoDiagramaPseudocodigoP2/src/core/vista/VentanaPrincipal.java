@@ -18,15 +18,15 @@ import modulos.control.BloqueSegun;
 import modulos.control.PanelesControlUI;
 
 public class VentanaPrincipal extends JFrame {
-    
+
     private LienzoTrabajo lienzo;
     // Variables para que los bloques no se dibujen uno encima del otro al crearlos
-    private int posicionX = 50; 
+    private int posicionX = 50;
     private int posicionY = 50;
 
     public VentanaPrincipal() {
         // Configuración básica de la ventana requerida para aplicaciones visuales
-        setTitle("Editor de Diagramas de Flujo - Programación 2");
+        setTitle("Editor de Diagramas de Flujo - Programación 2 - MOISES SAAVEDRA");
         setSize(1024, 768);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null); // Centra la ventana en la pantalla
@@ -147,7 +147,7 @@ public class VentanaPrincipal extends JFrame {
         JButton btnGuardar = new JButton("Guardar Proyecto");
         JButton btnCargar = new JButton("Cargar Proyecto");
         JButton btnGenerar = new JButton("Generar Código");
-        
+
         estilizarBoton(btnGuardar, Color.DARK_GRAY);
         estilizarBoton(btnCargar, Color.DARK_GRAY);
         estilizarBoton(btnGenerar, Color.BLACK);
@@ -191,7 +191,7 @@ public class VentanaPrincipal extends JFrame {
 
     // Método para evitar que el siguiente bloque caiga en la misma posición
     private void actualizarCoordenadas() {
-        posicionY += 70; 
+        posicionY += 70;
         // Si se sale de la pantalla hacia abajo, reinicia arriba más a la derecha
         if (posicionY > 600) {
             posicionY = 50;
